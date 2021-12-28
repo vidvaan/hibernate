@@ -1,5 +1,7 @@
 package com.createiq.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
@@ -48,9 +52,22 @@ public class Employee {
 	@JoinColumn(name = "addr_id")
 	private Address address;
 
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "dept_id")
 	private Department department;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "EMP_PRO", joinColumns = { @JoinColumn(name = "emp_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "pro_id") })
+	private List<Project> projects;
 
 	public Employee(int eid, String ename, double esal, Address address, Department department) {
 		super();
@@ -111,12 +128,10 @@ public class Employee {
 		return "Employee [eid=" + eid + ", ename=" + ename + ", esal=" + esal + ", address=" + address + "]";
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Employee [eid=" + eid + ", ename=" + ename + ", esal=" + esal + ", address=" + address + ", department="
-//				+ department + "]";
-//	}
-	
-	
-
+	// @Override
+	// public String toString() {
+	// return "Employee [eid=" + eid + ", ename=" + ename + ", esal=" + esal + ",
+	// address=" + address + ", department="
+	// + department + "]";
+	// }
 }

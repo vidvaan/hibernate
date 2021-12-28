@@ -21,6 +21,7 @@
 		<mapping class="com.createiq.model.Employee" />
 		<mapping class="com.createiq.model.Department" />
 		<mapping class="com.createiq.model.Address" />
+		<mapping class="com.createiq.model.Project"></mapping>
 		<mapping class="com.createiq.model.User"></mapping>
 	</session-factory>
 </hibernate-configuration>
