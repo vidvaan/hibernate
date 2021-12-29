@@ -1,6 +1,10 @@
 package com.createiq.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,20 +13,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_tab")
-public class User {
-	@Id
-	@Column(name = "user_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int uid;
-	@Column(name = "user_name")
-	private String uname;
+public class User implements Serializable {
+	@EmbeddedId
+	private User_PK user_PK;
+
 	@Column(name = "user_age")
 	private double uage;
 
-	public User(int uid, String uname, double uage) {
+	public User(User_PK user_PK, double uage) {
 		super();
-		this.uid = uid;
-		this.uname = uname;
+		this.user_PK = user_PK;
 		this.uage = uage;
 	}
 
@@ -31,20 +31,12 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getUid() {
-		return uid;
+	public User_PK getUser_PK() {
+		return user_PK;
 	}
 
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
-
-	public String getUname() {
-		return uname;
-	}
-
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setUser_PK(User_PK user_PK) {
+		this.user_PK = user_PK;
 	}
 
 	public double getUage() {
@@ -57,7 +49,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", uname=" + uname + ", uage=" + uage + "]";
+		return "User [user_PK=" + user_PK + ", uage=" + uage + "]";
 	}
 
 }

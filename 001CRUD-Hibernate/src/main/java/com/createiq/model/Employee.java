@@ -47,7 +47,6 @@ public class Employee {
 	private String ename;
 	@Column(name = "emp_sal")
 	private double esal;
-
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "addr_id")
 	private Address address;
